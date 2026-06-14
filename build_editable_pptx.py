@@ -43,8 +43,8 @@ title(s,"월별 실행 캘린더 · 액션플랜","8·11·12월 집중 · 항목
 # data
 items=[
  ("매크로","800,000 원",[0,5,0,0,5,5],"15"),
- ("마이크로","400,000 원",[18,35,20,17,28,32],"150"),
- ("나노","250,000 원",[22,42,25,20,30,36],"175"),
+ ("마이크로","400,000 원",[15,35,20,15,30,35],"150"),
+ ("나노","250,000 원",[20,45,25,20,30,35],"175"),
  ("KOL 무가시딩","100,000 원",[10,10,10,10,10,10],"60"),
  ("X(트위터) 시딩","500,000 원",[0,5,0,0,5,5],"15"),
  ("__G__","콘텐츠 · 바이럴",None,None),
@@ -84,7 +84,7 @@ for rd in rowdefs:
         a=tbl.cell(ri,0); b=tbl.cell(ri,7); a.merge(b); cell_style(a,rd[1],9.5,True,BLACK,LG,PP_ALIGN.LEFT)
     elif kind=="SUM":
         cell_style(tbl.cell(ri,0),"월 시딩 총건수",9.5,True,WHITE,BLACK,PP_ALIGN.LEFT)
-        for i,v in enumerate([50,97,55,47,78,88]): cell_style(tbl.cell(ri,i+1),str(v),11,True,WHITE,BLACK)
+        for i,v in enumerate([45,100,55,45,80,90]): cell_style(tbl.cell(ri,i+1),str(v),11,True,WHITE,BLACK)
         cell_style(tbl.cell(ri,7),"415건",10,True,WHITE,BLACK)
     elif kind=="BUD":
         cell_style(tbl.cell(ri,0),"월 예산 비중 / 금액",9.5,True,BLACK,WHITE,PP_ALIGN.LEFT)
