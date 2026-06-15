@@ -71,7 +71,7 @@ tbox(s,0.72,2.84,2.72,3.5,[
  [("",5,False,DARK)],
  [("올더베러 마케팅도 같은 원리입니다.",11,True,BLACK)],[("가장 무거운 첫 바퀴를 다수의 힘으",11,False,DARK)],[("로 밀어 돌리면, 후기·신뢰·전환·재",11,False,DARK)],[("구매가 연료가 되어 스스로 가속합니다.",11,False,DARK)]])
 # flywheel
-cx,cy,R=7.35,4.4,1.78
+cx,cy,R=6.65,4.4,1.62
 oval(s,cx-R,cy-R,2*R,2*R,None,MG,3)
 for a in (45,135,225,315):
     px=cx+R*math.cos(math.radians(a)); py=cy+R*math.sin(math.radians(a))
@@ -90,15 +90,24 @@ for nx,ny,t,sub in nodes:
     tbox(s,nx-nw/2,ny+0.02,nw,0.3,[[(sub,9.5,True,GRAY)]],PP_ALIGN.CENTER)
 # heavy first push label
 tbox(s,cx-1.5,cy-R-0.66,3.0,0.3,[[("↑ 가장 무거운 첫 바퀴",10.5,True,DARK)]],PP_ALIGN.CENTER)
-# right operation
-rrect(s,10.65,1.95,2.18,4.5,SOFT,LINE,2,0.06)
-tbox(s,10.82,2.12,1.9,0.3,[[("작동 원리",11,True,GRAY)]])
-rrect(s,10.82,2.45,1.84,1.02,BLACK,rad=0.1)
-tbox(s,10.82,2.55,1.84,0.9,[[("첫 바퀴 (7월)",11.5,True,WHITE)],[("가장 무겁게,",10,False,LGT)],[("강하게 민다",10,False,LGT)]],PP_ALIGN.CENTER)
-rrect(s,10.82,3.62,1.84,1.02,WHITE,LINE,2,0.1)
-tbox(s,10.82,3.72,1.84,0.9,[[("가속",11.5,True,BLACK)],[("관성이 붙어",10,False,DARK)],[("점점 빨리",10,False,DARK)]],PP_ALIGN.CENTER)
-rrect(s,10.82,4.79,1.84,1.05,BLACK,rad=0.1)
-tbox(s,10.82,4.9,1.84,0.92,[[("정상",11.5,True,WHITE)],[("올영세일",10,False,LGT)],[("랭킹 1위",10,False,LGT)]],PP_ALIGN.CENTER)
+# right operation — 인플루언서 시딩이 플라이휠로 도는 원리
+px,pw=9.72,3.12
+rrect(s,px,1.95,pw,4.5,SOFT,LINE,2,0.06)
+tbox(s,px+0.18,2.08,pw-0.34,0.3,[[("작동 원리",11,True,GRAY)]])
+tbox(s,px+0.18,2.34,pw-0.34,0.3,[[("인플루언서 시딩이 도는 원리",11.5,True,BLACK)]])
+ix=px+0.18; iw=pw-0.36
+# ① 정지마찰 돌파
+rrect(s,ix,2.68,iw,1.16,BLACK,rad=0.08)
+tbox(s,ix+0.16,2.74,iw-0.3,0.32,[[("① 정지마찰 돌파  ·  7~8월",10.5,True,WHITE)]])
+tbox(s,ix+0.16,3.06,iw-0.3,0.74,[[("다수 마이크로·나노를 동시에 시딩 → 후기·UGC가 임계량을 넘어 ‘많이 보이는 제품’으로 점화",9,False,LGT)]])
+# ② 관성·복리
+rrect(s,ix,3.96,iw,1.16,WHITE,LINE,2,0.08)
+tbox(s,ix+0.16,4.02,iw-0.3,0.32,[[("② 관성·복리  ·  9~11월",10.5,True,BLACK)]])
+tbox(s,ix+0.16,4.34,iw-0.3,0.74,[[("후기→신뢰→전환→랭킹→재노출 고리가 스스로 돌고, 위닝 콘텐츠를 PA·인앱에 재투입",9,False,DARK)]])
+# ③ 자가가속
+rrect(s,ix,5.24,iw,1.1,BLACK,rad=0.08)
+tbox(s,ix+0.16,5.3,iw-0.3,0.32,[[("③ 자가가속  ·  12월~",10.5,True,WHITE)]])
+tbox(s,ix+0.16,5.62,iw-0.3,0.68,[[("후기·CRM·재구매가 다음 시딩의 연료 → 적은 힘으로 더 빠르게, 올영세일 1위가 노출·신뢰를 다시 키움",9,False,LGT)]])
 # bottom connector
 rrect(s,0.5,6.62,12.33,0.6,BLACK,rad=0.12)
 tbox(s,0.5,6.62,12.33,0.6,[[("가장 무거운 ‘첫 바퀴’ = 시딩  ·  그 바퀴를 돌리는 ‘힘’ = 다수의 마이크로·나노  —  다음 두 장에서 증명합니다.",14.5,True,WHITE)]],PP_ALIGN.CENTER,MSO_ANCHOR.MIDDLE)
