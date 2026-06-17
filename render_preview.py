@@ -4,6 +4,7 @@
 import sys, math
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.oxml.ns import qn
 from PIL import Image, ImageDraw, ImageFont
 
 PXIN = 96  # px per inch
@@ -161,7 +162,14 @@ def draw_shape(draw, sh, ox=0, oy=0, sx=1.0, sy=1.0):
         return
     if st == MSO_SHAPE_TYPE.LINE or "connector" in name:
         c = lc or (40,40,40)
-        draw.line([x,y,x+w,y+h], fill=c, width=max(1,lw))
+        x1,y1,x2,y2 = x,y,x+w,y+h
+        try:
+            xf = sh._element.find('.//'+qn('a:xfrm'))
+            if xf is not None:
+                if xf.get('flipH')=='1': x1,x2 = x+w,x
+                if xf.get('flipV')=='1': y1,y2 = y+h,y
+        except Exception: pass
+        draw.line([x1,y1,x2,y2], fill=c, width=max(1,lw))
         return
     # right triangle (대각선 분할) with rotation
     try:
