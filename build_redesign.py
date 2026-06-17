@@ -337,85 +337,136 @@ s=newslide(); divider(s,"04","Viral","바이럴","구매 직전의 ‘확신’�
 s=newslide()
 content_header(s,"바이럴","VIRAL","바이럴의 역할은 구매 직전의 ‘확신’",
                "소비자가 제품을 본 뒤 검색·비교하는 순간, 충분한 후기·추천 맥락이 보이도록 설계")
-step_flow(s,1.0,2.45,11.33,[
-    ("제품을 본다","시딩·광고로 첫 인지 발생"),
-    ("검색·비교한다","제품명·카테고리·상황 키워드 탐색"),
-    ("‘선택해도 된다’ 확신","후기·장바구니·랭킹 맥락 확인"),
-    ("구매·전환","진성 구매·리뷰·랭킹 행동")])
-tri=[("검색 시 ‘비어 있지 않게’","제품·상황 키워드 검색에 정보성 콘텐츠 노출·자산화","→ 네이버·언론보도 GEO·AEO"),
-     ("비교 시 ‘선택 근거’ 제공","후기·장바구니·랭킹 맥락으로 ‘선택해도 되는 제품’ 확신","→ 커뮤니티·파워페이지"),
-     ("구매 ‘전환’으로 연결","진성 구매·리뷰·랭킹 행동으로 전환, 위닝은 PA 2차","→ 챌린저스·어필리에이트")]
+# 구매 여정 밴드
+rect(s,0.9,2.3,11.53,1.18,fill=BEIGE,rounded=True)
+textbox(s,1.18,2.44,8,0.3,[("소비자 구매 여정 — 올영 외부에서도 ‘선택 근거’를 채운다",11,GREEN,True)])
+for i,st in enumerate(["제품을 본다","검색·비교한다","‘선택해도 된다’ 확신","구매·전환"]):
+    x=1.05+i*2.85
+    rect(s,x,2.84,2.5,0.5,fill=WHITE,line=GREEN,line_w=1.2,rounded=True)
+    textbox(s,x,2.84,2.5,0.5,[(st,11,GREEN,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+    if i<3: arrow(s,x+2.53,2.97,0.26)
+# 역할 카드 3
+tri=[("검색 시 ‘비어 있지 않게’","제품명·카테고리·상황 키워드 검색 시 정보성 콘텐츠가 노출되도록 자산화. AI 답변·검색 결과에 ‘근거 있는 추천’으로 등장","네이버·언론보도 · GEO/AEO"),
+     ("비교 시 ‘선택 근거’ 제공","후기·장바구니·랭킹 맥락을 만들어 ‘선택해도 되는 제품’이라는 확신을 형성. 올영 외부에서도 비교·선택 근거를 채움","커뮤니티 · 파워페이지"),
+     ("구매 ‘전환’으로 연결","단순 노출이 아니라 진성 구매·리뷰·랭킹이라는 ‘행동’으로 전환. 위닝 콘텐츠는 PA 2차로 재투입","챌린저스 · 어필리에이트")]
 for i,(t,d,a) in enumerate(tri):
-    x=0.9+i*3.86
-    rect(s,x,4.55,3.66,1.9,fill=WHITE,line=LGRAY,rounded=True); rect(s,x,4.55,3.66,0.55,fill=GREEN)
-    textbox(s,x,4.55,3.66,0.55,[(t,11.5,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
-    textbox(s,x+0.25,5.2,3.16,0.95,[(d,10,GRAY,False)])
-    textbox(s,x+0.25,6.08,3.16,0.32,[(a,9.5,GREEN,True)])
+    x=0.9+i*3.905
+    rect(s,x,3.72,3.7,2.74,fill=WHITE,line=LGRAY,rounded=True)
+    rect(s,x,3.72,3.7,0.62,fill=GREEN)
+    textbox(s,x,3.72,3.7,0.62,[(t,11.5,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+    oval(s,x+0.28,4.55,0.5,fill=GREEN_B)
+    textbox(s,x+0.28,4.55,0.5,0.5,[(f"{i+1}",13,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+    textbox(s,x+0.92,4.55,2.6,0.5,[("바이럴이 채우는 지점",10,GREEN,True)],anchor=MSO_ANCHOR.MIDDLE)
+    textbox(s,x+0.28,5.22,3.16,1.0,[(d,9.8,GRAY,False)])
+    rect(s,x+0.28,6.06,3.16,0.36,fill=GREEN_B,rounded=True)
+    textbox(s,x+0.28,6.06,3.16,0.36,[("→  "+a,9.5,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+conc(s,"바이럴 = 노출 + 구매 직전 ‘확신’의 밀도 — 검증·신뢰 단계를 채운다")
 page_num(s,18)
 
 # ================= S19 챌린저스 =================
 s=newslide()
 content_header(s,"바이럴","CHALLENGE","챌린저스 — 올영 랭킹 1위 견인",
                "실제 올영 액티브 유저의 구매·리뷰 미션 — ‘인증 기반 챌린지’")
-step_flow(s,1.0,2.45,11.33,[
-    ("챌린지 참여 모집","습관 앱 챌린저스 내 미션 개설(실구매 의사 유저)"),
+rect(s,0.9,2.3,11.53,1.92,fill=BEIGE,rounded=True)
+step_flow(s,1.15,2.5,11.0,[
+    ("챌린지 참여 모집","습관 앱 챌린저스 내 미션 개설 (실구매 의사 유저 타겟)"),
     ("액티브 유저 실구매","올영을 활발히 쓰는 유저가 실제 구매"),
-    ("사용·리뷰 인증 미션","구매·사용·올영 리뷰 업로드를 ‘인증’"),
+    ("사용·리뷰 인증 미션","구매·사용·올영 리뷰 업로드를 ‘인증’으로 수행"),
     ("랭킹 1위 달성","시간대 분산 운영으로 랭킹·후기 동시 점화")])
-textbox(s,0.9,4.7,11.5,0.34,[("왜 효과적인가",12.5,INK,True)])
-bullets(s,0.9,5.1,5.7,1.5,[
-    "올영이 만든 웰니스 PB로 올영 랭킹 1위 달성",
-    "‘1위’ 키워드 플레이로 신뢰성 획득"],size=11,color=GRAY)
-bullets(s,6.8,5.1,5.6,1.5,[
-    "진성 구매자 자발 리뷰 = 신뢰 자산 확보",
-    "동시 게시 = 랭킹·후기 볼륨 ‘동시 점화’"],size=11,color=GRAY)
-conc(s,"진성 구매·리뷰를 10–18시 시간대별로 분산 매니징 → 최저 비용 최대 효율")
+rect(s,0.9,4.4,11.53,0.6,fill=GREEN,rounded=True)
+textbox(s,1.2,4.4,11.0,0.6,[("목표 — 올더베러의 올리브영 카테고리 랭킹 1위 달성 · know-how 기반 전략 운영 배치",12.5,WHITE,True)],anchor=MSO_ANCHOR.MIDDLE)
+why=[("올영 PB 신뢰","올영이 만든 웰니스 PB로 올영 랭킹 1위 달성"),
+     ("‘1위’ 키워드","랭킹 달성 후 ‘1위’ 키워드 플레이로 신뢰성 획득"),
+     ("진성 자발 리뷰","실사용자의 구매+후기로 신뢰 자산 확보"),
+     ("동시 점화","동시 게시 = 랭킹·후기 볼륨 ‘동시 점화’")]
+for i,(t,d) in enumerate(why):
+    x=0.9+i*2.905
+    rect(s,x,5.15,2.72,1.3,fill=WHITE,line=LGRAY,rounded=True); rect(s,x,5.15,0.08,1.3,fill=GREEN_B)
+    textbox(s,x+0.24,5.28,2.4,0.3,[(t,11,GREEN,True)])
+    textbox(s,x+0.24,5.62,2.42,0.8,[(d,9.3,GRAY,False)])
+conc(s,"진성 구매·리뷰를 10·12·14·16·18시로 분산 매니징 → 최저 비용 최대 효율")
 page_num(s,19)
 
 # ================= S20 커뮤니티·파워페이지 =================
 s=newslide()
-content_header(s,"바이럴","COMMUNITY","커뮤니티 · 파워페이지","‘추천템’ 검색·비교 맥락에 올더베러를 진입시키는 장치")
-two_col(s,2.45,3.9,
-    {"title":"A. 뷰티앱 · 커뮤니티 체험단","rows":[
+content_header(s,"바이럴","COMMUNITY","커뮤니티 · 파워페이지","‘추천템’ 검색·비교 맥락에 올더베러를 자연스럽게 진입시키는 장치")
+cols=[("A","뷰티앱 · 커뮤니티 체험단",[
         ("타겟","화해 등 뷰티앱·대형 커뮤니티의 카테고리 관여 高 사용자"),
         ("실행","체험단·어워드·랭킹 참여로 ‘검증된 후기’ 볼륨 확보"),
-        ("분석","구매 시 64.2%가 어워드·랭킹 참고 / 핏·효율은 선별 필요")]},
-    {"title":"B. 파워페이지 (SNS 정보성)","rows":[
-        ("타겟","SNS 잠재고객·구매 고의도 + ‘올리브오일 효능’ 검색자"),
-        ("실행","정보성 파워 블로그·전문 채널로 검색 상위·추천 점유"),
-        ("분석","인지·각인·전환 트리거를 퍼널 단계별로 제공")]})
-conc(s,"세일 전 탐색이 곧장 장바구니로 이어지도록 ‘추천템’ 맥락을 선점")
+        ("분석","화장품 구매 시 64.2%가 어워드·랭킹 참고 · 4단계 어뷰징 필터로 신뢰↑ / 핏·효율은 선별 필요")]),
+      ("B","파워페이지 (SNS 정보성)",[
+        ("타겟","SNS 잠재고객·구매 고의도 + ‘올리브오일 효능’·‘웰니스 구미 추천’ 검색자"),
+        ("실행","정보성 파워 블로그·전문 채널로 검색 상위·추천 리스트 점유"),
+        ("분석","모르는 대상엔 인지·각인, 고의도 대상엔 전환 트리거를 퍼널 단계별로 제공")])]
+w=5.515; gap=0.5
+for ci,(badge,title,rows) in enumerate(cols):
+    x=0.9+ci*(w+gap)
+    rect(s,x,2.45,w,4.0,fill=WHITE,line=LGRAY,rounded=True)
+    rect(s,x,2.45,w,0.7,fill=GREEN)
+    oval(s,x+0.26,2.58,0.44,fill=GREEN_B); textbox(s,x+0.26,2.58,0.44,0.44,[(badge,15,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+    textbox(s,x+0.85,2.45,w-1.0,0.7,[(title,14.5,WHITE,True)],anchor=MSO_ANCHOR.MIDDLE)
+    cy=3.32
+    for lab,txt in rows:
+        rect(s,x+0.25,cy,w-0.5,0.96,fill=BEIGE,rounded=True)
+        textbox(s,x+0.45,cy+0.12,2,0.3,[(lab,10.5,GREEN,True)])
+        textbox(s,x+0.45,cy+0.42,w-0.9,0.5,[(txt,9.4,GRAY,False)])
+        cy+=1.04
+conc(s,"세일 전 탐색이 곧장 장바구니로 이어지도록 ‘추천템’ 맥락을 선점한다")
 page_num(s,20)
 
 # ================= S21 GEO/AEO =================
 s=newslide()
 content_header(s,"바이럴","GEO·AEO","GEO/AEO — ‘검색 답변 시대’의 Pull 자산",
                "제로 클릭 시대 : 언론보도·정보성 콘텐츠를 AI가 인용하기 좋은 구조로 발행")
-two_col(s,2.45,2.0,
-    {"title":"GEO · 생성형 엔진 최적화","rows":[
-        ("","ChatGPT·Perplexity·Gemini가 답변을 만들 때 우리 콘텐츠를 ‘근거·출처’로 고르게 설계")]},
-    {"title":"AEO · 답변 엔진 최적화","rows":[
-        ("","구글 AI Overview·검색 요약 답변에 ‘정확한 출처’로 반영되도록 최적화")]})
-step_flow(s,1.0,4.85,11.33,[
-    ("키워드 설계","검색 의도 직답 구조"),
-    ("콘텐츠 발행","언론보도·정보성·인용형"),
-    ("검색·AI 답변 점유","출처·수치·정의 명시"),
-    ("자연 유입 증가","Pull로 탐색 순간 선점")])
-footnote(s,"※ GEO=생성형 AI 답변 출처 선택 최적화 / AEO=AI 요약 답변 출처 반영 최적화 · 2026 검색 트렌드 + BAT 내부 프로토콜 기반",y=7.1)
+cards=[("GEO · 생성형 엔진 최적화","ChatGPT·Perplexity·Gemini가 답변 생성 시 우리 콘텐츠를 ‘근거·출처’로 고르게 설계",
+        ["검색 의도에 직답하는 구조로 작성","출처·수치·정의를 명시해 ‘인용 가능’하게","언론보도 초안부터 AI 인용 형식으로 발행"]),
+       ("AEO · 답변 엔진 최적화","구글 AI Overview·검색 요약 답변에 ‘정확한 출처’로 반영되도록 최적화",
+        ["발행 전 AI가 실제로 어떻게 읽는지 점검","‘검색 1위’보다 ‘AI 답변 인용’이 새 경쟁력","Push가 닿지 않는 탐색 순간을 Pull로 선점"])]
+w=5.515; gap=0.5
+for ci,(title,deftxt,bl) in enumerate(cards):
+    x=0.9+ci*(w+gap)
+    rect(s,x,2.45,w,2.6,fill=WHITE,line=LGRAY,rounded=True)
+    rect(s,x,2.45,w,0.6,fill=GREEN)
+    textbox(s,x+0.3,2.45,w-0.6,0.6,[(title,13.5,WHITE,True)],anchor=MSO_ANCHOR.MIDDLE)
+    textbox(s,x+0.3,3.16,w-0.6,0.6,[(deftxt,10,GRAY,False)])
+    bullets(s,x+0.3,3.86,w-0.6,1.1,bl,size=10,color=INK)
+rect(s,0.9,5.2,11.53,1.25,fill=BEIGE,rounded=True)
+textbox(s,1.18,5.32,4,0.3,[("운영 플로우",11,GREEN,True)])
+for i,lab in enumerate(["키워드 설계","콘텐츠 발행","검색·AI 답변 점유","자연 유입 증가"]):
+    x=1.15+i*2.78
+    oval(s,x,5.72,0.5,fill=GREEN); textbox(s,x,5.72,0.5,0.5,[(f"{i+1}",13,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+    textbox(s,x+0.62,5.72,2.0,0.5,[(lab,10.5,INK,True)],anchor=MSO_ANCHOR.MIDDLE)
+    if i<3: arrow(s,x+2.42,5.85,0.26)
+conc(s,"‘검색 1위’가 아니라 ‘AI 답변에 인용’ — 탐색 순간을 Pull로 선점한다")
 page_num(s,21)
 
 # ================= S22 어필리에이트 =================
 s=newslide()
 content_header(s,"바이럴","AFFILIATE","어필리에이트 — 추천을 구매로 연결",
                "올영 쇼핑 큐레이터를 코어로 — 앱 내 발견·구매로 직결, 랭킹 견인에 기여")
-styled_table(s,0.9,2.5,11.53,[
-    ["구분","올리브영 쇼핑 큐레이터","쿠팡 파트너스"],
+for i,r in enumerate(["올영 앱 내 ‘발견 → 구매’ 직결","세일 기간 랭킹·매출 견인","고객 참여형 진성 추천 자산"]):
+    x=0.9+i*3.905
+    rect(s,x,2.32,3.7,0.6,fill=BEIGE,rounded=True); rect(s,x,2.32,0.08,0.6,fill=GREEN_B)
+    textbox(s,x+0.28,2.32,3.4,0.6,[("✓  "+r,10.5,INK,True)],anchor=MSO_ANCHOR.MIDDLE)
+styled_table(s,0.9,3.12,11.53,[
+    ["구분","★ 올리브영 쇼핑 큐레이터 (코어)","쿠팡 파트너스"],
     ["역할","올영 고객 참여형 — 앱 내 전환 직결","외부 구매 링크로 연결"],
-    ["운영 방식","개인 URL·셔터, 인스타·블로그·틱톡·유튜브 추천","고유 추적 링크 기반 외부 트래픽"],
+    ["운영 방식","개인 URL·셔터, 인스타·블로그·틱톡·유튜브 추천","고유 추적 링크 기반 외부 트래픽 확보"],
     ["콘텐츠 주제","올영세일 장바구니·웰니스 추천템·구미 입문템","가격 비교·제품 후기·카테고리 추천"],
     ["기대 효과","앱 내 발견→구매, 세일 랭킹/매출 견인","외부 유입 보강·전환 링크 확보"]],
-    col_w=[1.2,3.2,3.0], fs=10.5, h_fs=11.5, row_h=0.72, first_col_bold=True)
+    col_w=[1.2,3.2,3.0], fs=10, h_fs=11, row_h=0.52, first_col_bold=True)
+# 올영 컬럼 강조 테두리
+colx=0.9+11.53*1.2/7.4; colw=11.53*3.2/7.4
+rect(s,colx,3.12,colw,0.52*5,fill=None,line=GREEN_B,line_w=2.5)
+# 프로세스 플로우
+rect(s,0.9,6.0,11.53,0.5,fill=BEIGE,rounded=True)
+fl=["추천 콘텐츠","개인 URL·셔터","앱 내 발견","구매·랭킹 견인"]
+for i,lab in enumerate(fl):
+    x=1.2+i*2.95
+    textbox(s,x,6.0,2.4,0.5,[(("→  " if i else "")+lab,10.5,GREEN,True)],anchor=MSO_ANCHOR.MIDDLE)
+conc(s,"올영 쇼핑 큐레이터를 코어로 — 추천이 앱 내 발견·구매·랭킹으로 직결된다")
 page_num(s,22)
+
 
 # ================= S23 divider =================
 s=newslide(); divider(s,"05","Operation","운영 · 액션플랜","6개월 로드맵과 견적"); page_num(s,23)
