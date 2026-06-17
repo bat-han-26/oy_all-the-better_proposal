@@ -92,21 +92,37 @@ dd.rounded_rectangle([hx,ppy+pph-150,hx+260,ppy+pph+30],50,fill=SK)
 for k in range(4):
     dd.rounded_rectangle([hx+30+k*56,ppy+pph-150,hx+72+k*56,ppy+pph+10],22,fill=SK2)
 
-# ================= overlay text (casual UGC) =================
-# top hook handwriting-ish
-T(dd,(70,250),"요즘 내 ‘자기 전’ 루틴",fnt(58),(255,255,255),bold=2)
-T(dd,(70,330),"솔직 후기 들려줄게",fnt(58),(252,255,161),bold=2)
-# subtitle (reel style) lower-center
-sub="“불 끄기 전 마지막으로 챙기는 거 하나”"
-f2=fnt(40)
-tw=dd.textlength(sub,font=f2)
-dd.rounded_rectangle([(W-tw)//2-26,1690,(W+tw)//2+26,1762],18,fill=(0,0,0))
-T(dd,(W//2,1726),sub,f2,(255,255,255),anchor="mm",bold=1)
+# ================= overlay text (compliant) =================
+# top-center title + TPO
+T(dd,(W//2,206),"·  멜라나잇  ·",fnt(78),(255,255,255),anchor="mm",bold=2)
+T(dd,(W//2,300),"·  취침 전  ·",fnt(40),(232,224,240),anchor="mm",bold=1)
+chip="하루를 차분히 마무리하고 싶은 30대"
+cf=fnt(36); cw=dd.textlength(chip,font=cf)
+dd.rounded_rectangle([(W-cw)//2-36,352,(W+cw)//2+36,424],36,fill=(150,120,168))
+T(dd,(W//2,388),chip,cf,(255,255,255),anchor="mm",bold=1)
+# left speech bubbles (compliant captions — no efficacy)
+def bubble(x,y,text,maxw=430):
+    f=fnt(29); lines=[]; ln=""
+    for ch in text:
+        if dd.textlength(ln+ch,font=f)>maxw and ln: lines.append(ln); ln=ch
+        else: ln+=ch
+    if ln: lines.append(ln)
+    bw=max(dd.textlength(l,font=f) for l in lines)+48; bh=20+len(lines)*40+16
+    dd.rounded_rectangle([x,y,x+bw,y+bh],22,fill=(255,255,255))
+    cy=y+18
+    for l in lines:
+        T(dd,(x+24,cy),l,f,(40,32,46)); cy+=40
+    return y+bh+18
+by=1150
+for c in ["불 끄기 전, 나만의 밤 마무리 리추얼로 챙겨요",
+          "타트체리 맛이라 자기 전에 부담 없이 한 알",
+          "하루 루틴의 마무리, 이제 멜라나잇이 필수예요"]:
+    by=bubble(60,by,c)
 
 # ================= reel UI =================
 # 광고 badge
-dd.rounded_rectangle([W-250,80,W-60,150],26,fill=(252,255,161))
-T(dd,(W-155,115),"협찬·광고",fnt(30),(60,45,30),anchor="mm",bold=1)
+dd.rounded_rectangle([W-368,78,W-60,152],26,fill=(252,255,161))
+T(dd,(W-214,115),"광고·유료 파트너십",fnt(28),(60,45,30),anchor="mm",bold=1)
 # right action icons
 ix=W-92
 def heart(x,y):
@@ -118,12 +134,12 @@ dd.polygon([(ix-24,1230),(ix+24,1212),(ix-2,1256)],outline=(255,255,255),width=2
 # music disc
 dd.ellipse([ix-26,1340,ix+26,1392],fill=(40,30,45),outline=(255,255,255),width=5); dd.ellipse([ix-7,1359,ix+7,1373],fill=(255,255,255))
 # bottom: handle + audio + progress
-T(dd,(70,H-178),"@yujin.nightlog · 팔로우",fnt(34),(255,255,255),bold=1)
-T(dd,(70,H-128),"♫  원본 오디오 · yujin.nightlog",fnt(28),(225,218,230))
-T(dd,(70,H-84),"#오늘도배러 #자기전루틴 #멜라나잇구미 #타트체리",fnt(26),(252,255,161),bold=1)
+T(dd,(70,H-182),"@good_night._day · 팔로우",fnt(34),(255,255,255),bold=1)
+T(dd,(70,H-132),"[광고] 요즘 제 밤 마무리 루틴에 챙기는 멜라나잇",fnt(27),(225,218,230))
+T(dd,(70,H-86),"#멜라나잇 #취침전 #자기전루틴 #밤마무리루틴 #30대필수템",fnt(24),(252,255,161),bold=1)
 dd.rounded_rectangle([60,H-44,W-60,H-36],4,fill=(120,110,120))
 dd.rounded_rectangle([60,H-44,520,H-36],4,fill=(255,255,255))
 # corner note
-T(dd,(70,H-228),"인플루언서 UGC 리뷰 시딩 — 콘셉트 썸네일(일러스트) · 일반식품 효능 표현 배제",fnt(22),(200,190,205))
+T(dd,(70,H-228),"인플루언서 UGC 리뷰 시딩 — 콘셉트 썸네일(일러스트) · 일반식품 = 효능 표현 배제 / 무드·TPO 소구",fnt(22),(200,190,205))
 
-img.save("/tmp/melanight_ugc.png"); print("saved",img.size)
+img.save("/tmp/melanight_ugc2.png"); print("saved",img.size)
