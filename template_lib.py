@@ -7,15 +7,22 @@ from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.oxml.ns import qn
 
-# ---- brand tokens (from sample ppt) ----
-GREEN   = RGBColor(0x09,0x58,0x2F)  # deep green (primary accent = template red 대체)
-GREEN_B = RGBColor(0x00,0xB0,0x50)  # bright green
-YELLOW  = RGBColor(0xFE,0xFF,0xA1)
+# ---- brand tokens (공식 가이드: 메인=딥브라운 주색) ----
+MAIN    = RGBColor(0x3D,0x2B,0x1B)  # 메인 컬러 (주색)
+BROWN2  = RGBColor(0x6B,0x4E,0x2A)  # 강조색 1
+GREENA  = RGBColor(0x0E,0x5A,0x30)  # 강조색 2 (그린)
+OLIVE   = RGBColor(0x9A,0x9A,0x3C)  # 서브 컬러 1
+LIME    = RGBColor(0xC7,0xCE,0x3E)  # 서브 컬러 2
+PINK    = RGBColor(0xF0,0xA4,0x93)  # 서브 컬러 3
 BEIGE   = RGBColor(0xF3,0xF2,0xE7)
 INK     = RGBColor(0x14,0x14,0x12)
 GRAY    = RGBColor(0x86,0x86,0x80)
-LGRAY   = RGBColor(0xBD,0xBD,0xB6)
+LGRAY   = RGBColor(0xC9,0xC4,0xB8)
 WHITE   = RGBColor(0xFF,0xFF,0xFF)
+# 컴포넌트 코드 호환 별칭: GREEN=주색(브라운), GREEN_B=그린강조, YELLOW=라임
+GREEN   = MAIN
+GREEN_B = GREENA
+YELLOW  = LIME
 FONT = "Pretendard"
 
 def _set_font(run, size, color, bold=False, font=FONT, spacing=None):
@@ -29,8 +36,9 @@ def _set_font(run, size, color, bold=False, font=FONT, spacing=None):
     if ea is None:
         ea = rPr.makeelement(qn('a:ea'), {}); rPr.append(ea)
     ea.set('typeface', font)
-    if spacing is not None:
-        rPr.set('spc', str(int(spacing*100)))
+    if spacing is None:
+        spacing = -1.0  # 가이드: 자간 좁게 1pt
+    rPr.set('spc', str(int(spacing*100)))
 
 def textbox(slide, x, y, w, h, lines, align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP, wrap=True):
     """lines: list of (text, size, color, bold) or (text,size,color,bold,spacing)"""
@@ -130,13 +138,13 @@ from pptx.oxml.ns import qn as _qn
 
 def content_header(slide, label_kr, label_en, headline, sub=""):
     section_label(slide, label_kr, label_en)
-    textbox(slide, 0.9, 1.12, 11.53, 0.62, [(headline,23,INK,True)], align=PP_ALIGN.CENTER)
+    textbox(slide, 0.9, 1.08, 11.53, 0.66, [(headline,26,INK,True)], align=PP_ALIGN.CENTER)
     if sub:
-        textbox(slide, 1.4, 1.78, 10.53, 0.5, [(sub,12.5,GRAY,False)], align=PP_ALIGN.CENTER)
+        textbox(slide, 1.4, 1.82, 10.53, 0.5, [(sub,12,GRAY,False)], align=PP_ALIGN.CENTER)
 
 def divider(slide, part_no, en, title, sub=""):
-    rect(slide, 0,0,13.33,7.5, fill=INK)
-    rtri(slide, -1.2, 0, 9.8, 7.5, rot=0, fill=GREEN)
+    rect(slide, 0,0,13.33,7.5, fill=MAIN)        # 메인 브라운 주색 필드
+    rtri(slide, -1.2, 0, 9.8, 7.5, rot=0, fill=GREENA)  # 그린 대각선 강조
     textbox(slide, 0.95, 2.5, 7, 0.45, [("PART "+part_no+"   "+en.upper(),15,YELLOW,True,3)])
     textbox(slide, 0.9, 3.0, 9, 1.4, [(title,38,WHITE,True)])
     if sub:
