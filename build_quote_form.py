@@ -21,41 +21,80 @@ def C(ws,r,c,v=None,b=False,col=INK,fill=None,al="center",fmt=None,sz=10,wrap=Fa
 def mrg(ws,r1,c1,r2,c2): ws.merge_cells(start_row=r1,start_column=c1,end_row=r2,end_column=c2)
 wb=openpyxl.Workbook()
 
-# ===================================== 견적제안
+# ===================================== 견적제안 (예시 프레임형 레이아웃)
 ws=wb.active; ws.title="견적제안"
-for i,w in enumerate([2.6,24,2.6,95]): ws.column_dimensions[get_column_letter(i+1)].width=w
-C(ws,1,2,"올리브영 PB 올더베러 브랜드 빌딩 캠페인 — 견적 제안",b=True,sz=15,al="left",border=False)
-def prop(r,label,vals):
-    if isinstance(vals,str): vals=[vals]
-    C(ws,r,2,label,b=True,al="left")
-    if len(vals)>1: mrg(ws,r,2,r+len(vals)-1,2)
-    for i,v in enumerate(vals):
-        red = v.strip().startswith("- 스프레이") or "스프레이ai" in v or "스프레이AI" in v
-        C(ws,r+i,4,v,al="left",wrap=True,border=False,col=RED if red else INK,b=red)
-    return r+len(vals)
-r=3
-r=prop(r,"· 프로젝트명","올리브영 PB 올더베러 브랜드 빌딩 캠페인 (인플루언서 시딩·바이럴 통합)")+1
-r=prop(r,"· 집행 기간","2026년 7월 1일 ~ 2026년 12월 31일 (6개월)")+1
-r=prop(r,"· 집행 내용",["① 인플루언서 시딩(나노·마이크로 코어) 중심의 진성 UGC 콘텐츠 대량 확산 — ‘선택 증거’ 확보",
-                   "② 바이럴(커뮤니티·파워페이지·챌린저스·어필리에이트·GEO/AEO) — 구매 직전 ‘확신’ 형성 및 올영 랭킹 1위 견인",
-                   "③ 위닝 콘텐츠·시딩 자산을 올영세일 구매 전환으로 직접 연결"])+1
-r=prop(r,"· 견적 상세",["· 총 견적 : KRW 249,450,000원 (VAT 별도)   ※ 마크업 포함, 2.5억 내",
-                   "· 크리에이터·집행 원고료 : 244,450,000원",
-                   "· 예상 마크업 : 5,000,000원 (커뮤니티·챌린저스 항목 한정 20%)",
-                   "· 목표 시딩 수량 : IG·TikTok·YT·Blog 등 총 575건"])+1
-r=prop(r,"· 원고료/마크업 안내",["· 마크업은 ‘커뮤니티 체험단’·‘챌린저스’ 2개 항목에만 20% 적용",
-                       "· 그 외 크리에이터 시딩·바이럴·어필리에이트는 원고료(집행 단가) 기준",
-                       "· 나노 25만 / 마이크로 50만 / 매크로 80만 (IG·TikTok 동일 단가)"])+1
-r=prop(r,"· 콘텐츠 제작 안내",["· 별도 콘텐츠 제작비(KV·디자인·영상·EGC) 미계상 → 전액 인플루언서 시딩(마이크로·나노 5:5)으로 재배분",
-                       "· UGC·Half EGC·EGC 영상은 크리에이터 시딩 원고료 내에서 제작·확보"])+1
-r=prop(r,"· 무상 지원 내역",["· [대행 기간 솔루션 무상 지원] 대행 업무 수행 시 2개 솔루션 이용료를 대행 종료시점까지 무상 지원 예정",
-                      "- 스프레이ai 솔루션 월 이용료 420만원(브랜드 1개 기준)  ※ 연간 5,040만원 상당",
-                      "- 피처링 스탠다드형 솔루션 (연간 이용료 378만원 상당)",
-                      "· 고성과 리포트 대시보드 / 올리비아 AI 콘텐츠·리포팅 어시스턴트",
-                      "· VOC 딥다이브 리포트 / Claude AI 심의 사전검수 / 월간 성과 리포팅"])+1
-r=prop(r,"· 특이사항",["· 시장 단가 변동 및 모집 기간에 따라 총 원고료는 소폭 변동될 수 있습니다.",
-                  "· 캠페인별 상세 전략·일정은 ‘견적상세’ 및 ‘월별 액션플랜’ 시트를 확인 바랍니다."])
-for rr in range(3,r+2): ws.row_dimensions[rr].height=18
+GRAY="F2F2F2"
+# A 여백 / B 좌측띠 / C 라벨 / D 스페이서 / E 값(넓게) / F 우측띠
+for i,w in enumerate([2.6,5.8,23.7,3.0,96,5.8]): ws.column_dimensions[get_column_letter(i+1)].width=w
+LC,VC,FL,FR=3,5,2,6
+TOP=2
+sections=[
+ ("· 프로젝트명",[("올리브영 PB 올더베러 브랜드 빌딩 캠페인",True,False)],False),
+ ("· 집행 기간",[("2026년 7월 1일 ~ 2026년 12월 31일 (6개월) · 인플루언서 시딩·바이럴 통합",False,False)],False),
+ ("· 집행 내용",[("① 인플루언서 시딩(나노·마이크로 코어) 중심 진성 UGC 대량 확산 — ‘선택 증거’ 확보",False,False),
+            ("② 바이럴(커뮤니티·파워페이지·챌린저스·어필리에이트·GEO/AEO) — 구매 직전 ‘확신’·올영 랭킹 1위 견인",False,False),
+            ("③ 위닝 콘텐츠·시딩 자산을 올영세일 구매 전환으로 직접 연결",False,False)],False),
+ ("· 견적 상세",[("· 총 견적 : KRW 249,450,000원 (VAT 별도)   ※ 마크업 포함, 2.5억 내",False,False),
+            ("· 크리에이터·집행 원고료 : 244,450,000원",False,False),
+            ("· 예상 마크업 : 5,000,000원 (커뮤니티·챌린저스 항목 한정 20%)",False,False),
+            ("· 목표 시딩 수량 : IG·TikTok·YT·Blog 등 총 575건",False,False)],False),
+ ("· A/C 견적 상세",[("· 크리에이터 시딩 : 206,250,000원  (마이크로 235 · 나노 235 · 매크로 15 · KOL 60 · X 15 · 블로그 15)",False,True),
+              ("· 콘텐츠·바이럴 : 38,200,000원  (파워페이지 9 · 커뮤니티 체험단 3 · 챌린저스 2회 · 어필리에이트 60)",False,True),
+              ("· 마크업 (커뮤니티·챌린저스 20%) : 5,000,000원",False,True),
+              ("· 총 합계 : 249,450,000원 (VAT 별도)",True,True)],True),
+ ("· 원고료/마크업 안내",[("· 마크업은 ‘커뮤니티 체험단’·‘챌린저스’ 2개 항목에만 20% 적용",False,False),
+                ("· 그 외 크리에이터 시딩·바이럴·어필리에이트는 원고료(집행 단가) 기준",False,False),
+                ("· 나노 25만 / 마이크로 50만 / 매크로 80만 (IG·TikTok 동일 단가)",False,False)],False),
+ ("· 콘텐츠 제작 안내",[("· 별도 콘텐츠 제작비(KV·디자인·영상·EGC) 미계상 → 전액 인플루언서 시딩(마이크로·나노 5:5)으로 재배분",False,False),
+                ("· UGC·Half EGC·EGC 영상은 크리에이터 시딩 원고료 내에서 제작·확보 · 퍼포먼스 항목 없음",False,False)],False),
+ ("· 무상 지원 내역",[("· [대행 기간 솔루션 무상 지원] 대행 수행 시 2개 솔루션 이용료를 대행 종료시점까지 무상 지원 예정",False,False),
+               ("- 스프레이ai 솔루션 월 이용료 420만원(브랜드 1개 기준)  ※ 연간 5,040만원 상당","RED",False),
+               ("- 피처링 스탠다드형 솔루션 (연간 이용료 378만원 상당)",False,False),
+               ("· 고성과 리포트 대시보드 / 올리비아 AI 콘텐츠·리포팅 어시스턴트",False,False),
+               ("· VOC 딥다이브 리포트 / Claude AI 심의 사전검수 / 월간 성과 리포팅",False,False)],False),
+ ("· 특이사항",[("· 시장 단가 변동 및 모집 기간에 따라 총 원고료는 소폭 변동될 수 있습니다.",False,False),
+            ("· 캠페인별 상세 전략·일정은 ‘견적상세’ 및 ‘월별 액션플랜’ 시트를 확인 바랍니다.",False,False)],False),
+]
+r=TOP+1
+for label,vals,shadeblk in sections:
+    r0=r
+    for i,(txt,big,shade) in enumerate(vals):
+        red = big=="RED"
+        cc=C(ws,r,VC,txt,b=(big is True or red),al="left",sz=(18 if big is True else 10),
+             col=(RED if red else INK),border=False)
+        if shade: cc.fill=PatternFill("solid",fgColor=GRAY)
+        ws.row_dimensions[r].height=(26 if big is True else 18)
+        r+=1
+    # label (C) at section top, vertical-center across the block
+    C(ws,r0,LC,label,b=True,al="left",sz=10,border=False)
+    if r-r0>1: mrg(ws,r0,LC,r-1,LC)
+    r+=1   # blank spacer row between sections
+BOT=r
+# ---- 프레임/띠/테두리 ----
+for rr in range(TOP,BOT+1):
+    for cc in (FL,FR):
+        ws.cell(rr,cc).fill=PatternFill("solid",fgColor=GRAY)
+# C 라벨열 세로 박스 (좌우 테두리 전 구간) + 값열 좌측 살짝
+for rr in range(TOP,BOT+1):
+    ws.cell(rr,LC).border=Border(left=Side(style="hair",color="D9D9D9"),right=Side(style="hair",color="D9D9D9"))
+# 상/하단 띠
+for cc in range(FL,FR+1):
+    ws.cell(TOP,cc).fill=PatternFill("solid",fgColor=GRAY)
+    ws.cell(BOT,cc).fill=PatternFill("solid",fgColor=GRAY)
+ws.row_dimensions[TOP].height=10; ws.row_dimensions[BOT].height=10
+# 외곽 테두리 프레임 (B..F, TOP..BOT)
+med=Side(style="thin",color="808080")
+for rr in range(TOP,BOT+1):
+    lc=ws.cell(rr,FL); rc=ws.cell(rr,FR)
+    lc.border=Border(left=med, top=(med if rr==TOP else None), bottom=(med if rr==BOT else None))
+    rc.border=Border(right=med, top=(med if rr==TOP else None), bottom=(med if rr==BOT else None))
+for cc in range(FL,FR+1):
+    tcell=ws.cell(TOP,cc); bcell=ws.cell(BOT,cc)
+    tb=tcell.border; bb=bcell.border
+    tcell.border=Border(top=med,left=tb.left,right=tb.right)
+    bcell.border=Border(bottom=med,left=bb.left,right=bb.right)
+# 문서 타이틀(상단 띠 위) — 작게
+C(ws,TOP,LC,"BAT  |  견적 제안서",b=True,sz=9,al="left",col="808080",border=False)
 
 # ===================================== 견적상세
 ds=wb.create_sheet("견적상세")
