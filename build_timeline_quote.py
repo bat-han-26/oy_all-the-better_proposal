@@ -15,6 +15,8 @@ GBORDER=RGBColor(0xD2,0xD2,0xCC)
 BLACK=RGBColor(0x20,0x20,0x20)
 PH1=RGBColor(0x33,0x33,0x33); PH2=RGBColor(0x9C,0x9C,0x97)
 ACCENT=RGBColor(0x0E,0x5A,0x30)
+BEIGE=RGBColor(0xF3,0xF2,0xE7)
+ROWBG=RGBColor(0xFD,0xFD,0xFA)
 
 prs=Presentation(); prs.slide_width=Inches(13.33); prs.slide_height=Inches(7.5)
 s=prs.slides.add_slide(prs.slide_layouts[6])
@@ -59,6 +61,9 @@ SX,SW=11.10,1.68
 def mx(i): return MX0+i*MW
 months=["7월","8월","9월","10월","11월","12월"]
 msub=["","세일 사전","세일 ★","","블프 ★","세일 ★"]
+
+# ---------- background ----------
+rect(-0.1,-0.1,13.53,7.7,fill=BEIGE)
 
 # ---------- title ----------
 tb(0.55,0.28,12.2,0.6,[("월별 실행 타임라인 · 액션플랜  —  견적 포함",25,INK,True)],align=PP_ALIGN.LEFT)
