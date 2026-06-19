@@ -121,5 +121,58 @@ rect(s,0.9,6.42,11.53,0.66,fill=MAIN,rounded=True)
 textbox(s,1.2,6.42,11.0,0.66,[("광고주 베네핏     ",11,LIME,True),
   ("시장가 대비 약 20% 절감 단가   ·   검증된 고품질 콘텐츠   ·   6개월 안정적·예측 가능한 수급",11.5,WHITE,True)],anchor=MSO_ANCHOR.MIDDLE,align=PP_ALIGN.CENTER)
 
-prs.save("proposal/올더베러_BATi_2p.pptx")
-print("saved", len(prs.slides._sldIdLst))
+# ============================================================ SLIDE 3 (앰배서더 풀)
+def linktext(s,x,y,w,h,text,url,sz,col):
+    box=s.shapes.add_textbox(Inches(x),Inches(y),Inches(w),Inches(h))
+    tf=box.text_frame; tf.word_wrap=False; tf.vertical_anchor=MSO_ANCHOR.MIDDLE
+    tf.margin_left=Pt(0);tf.margin_right=Pt(0);tf.margin_top=Pt(0);tf.margin_bottom=Pt(0)
+    p=tf.paragraphs[0]; p.alignment=PP_ALIGN.CENTER
+    r=p.add_run(); r.text=text; _set_font(r,sz,col,True)
+    try: r.hyperlink.address=url
+    except Exception: pass
+    return box
+
+def draw_pool(s):
+    content_header(s,"BATi","AMBASSADOR POOL","이런 마이크로 앰배서더들과 함께 콘텐츠를 만들어 갑니다")
+    textbox(s,1.4,1.84,10.53,0.4,[("BAT 실(實)리드 풀에서 올더베러 브랜드 결에 맞춰 큐레이션한 마이크로 앰배서더 예시",12,GRAY,False)],align=PP_ALIGN.CENTER)
+    pool=[
+     ("@48kcal","https://www.instagram.com/48kcal","48","헬시 이팅 · 저칼로리 식단",
+      "웰니스 구미·올리브오일을 ‘가볍게 챙기는 한 끼’ 루틴으로 — 칼로리 부담 없는 데일리 웰니스",
+      "#헬시이팅   #식단관리   #웰니스루틴"),
+     ("@dewybin","https://www.instagram.com/dewybin","DB","뷰티 · 스킨케어 데일리",
+      "멜라나잇 ‘자기 전 이너뷰티’ 루틴 — 속건강이 피부로 드러나는 뷰티 내러티브",
+      "#이너뷰티   #나이트루틴   #글로우업"),
+     ("@positive.seo","https://www.instagram.com/positive.seo","PS","긍정 라이프스타일 · 자기관리",
+      "‘오늘도 베러’ 데일리 습관 — 작은 자기관리가 쌓이는 긍정 웰니스 마인드셋",
+      "#데일리웰니스   #자기관리   #오늘도베러"),
+    ]
+    cy=2.42; ch=3.62; cw=3.71; xs=[0.9,4.81,8.72]
+    acc=[GREENA,MAIN,GREENA]
+    for (h,url,ini,cat,ang,tags),x,a in zip(pool,xs,acc):
+        rect(s,x,cy,cw,ch,fill=BEIGE,line=LGRAY,line_w=1.0,rounded=True)
+        rect(s,x,cy,cw,0.12,fill=a)
+        cx=x+cw/2
+        oval(s,cx-0.55,cy+0.32,1.1,fill=a,line=WHITE,line_w=2.0)
+        textbox(s,cx-0.55,cy+0.32,1.1,1.1,[(ini,24,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
+        linktext(s,x+0.2,cy+1.5,cw-0.4,0.36,h,url,16,INK)
+        textbox(s,x+0.2,cy+1.9,cw-0.4,0.28,[("Instagram",9,GRAY,False)],align=PP_ALIGN.CENTER)
+        line2(s,x+0.5,cy+2.24,x+cw-0.5,cy+2.24,LGRAY,1.0)
+        textbox(s,x+0.2,cy+2.3,cw-0.4,0.3,[(cat,11,a if a!=MAIN else MAIN,True)],align=PP_ALIGN.CENTER)
+        textbox(s,x+0.32,cy+2.66,cw-0.62,0.78,[(ang,9.7,RGBColor(0x3A,0x3A,0x36),False)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.TOP)
+        textbox(s,x+0.2,cy+3.28,cw-0.4,0.28,[(tags,9,GREENA,True)],align=PP_ALIGN.CENTER)
+    # bottom curation bar
+    rect(s,0.9,6.28,11.53,0.6,fill=MAIN,rounded=True)
+    textbox(s,1.2,6.28,11.0,0.6,[("BAT 실리드 풀 큐레이션     ",11,LIME,True),
+      ("브랜드 결에 맞는 마이크로 앰배서더와 6개월 다회차로 콘텐츠 자산을 누적합니다",11.5,WHITE,True)],anchor=MSO_ANCHOR.MIDDLE,align=PP_ALIGN.CENTER)
+    textbox(s,0.9,6.96,11.53,0.3,[("※ 상기 크리에이터는 카테고리·결 예시이며, 실제 섭외 명단은 협의 후 확정됩니다.",8.5,GRAY,False)],align=PP_ALIGN.CENTER)
+
+s3=prs.slides.add_slide(BL); draw_pool(s3)
+
+prs.save("proposal/올더베러_BATi_3p.pptx")
+print("combined saved", len(prs.slides._sldIdLst))
+
+# 단독 1p
+prs2=Presentation(); prs2.slide_width=Inches(13.33); prs2.slide_height=Inches(7.5)
+draw_pool(prs2.slides.add_slide(prs2.slide_layouts[6]))
+prs2.save("proposal/올더베러_BATi_앰배서더풀_1p.pptx")
+print("standalone saved")
