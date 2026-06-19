@@ -20,17 +20,21 @@ def chip(s,x,y,w,h,en,kr,fill=GREENA):
     textbox(s,x,y+0.07,w,0.26,[(en,9,LIME,True,1.2)],align=PP_ALIGN.CENTER)
     textbox(s,x,y+0.30,w,h-0.34,[(kr,12.5,WHITE,True)],align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
 
-def card(s,x,y,w,h,no,en,title,bullets,accent=GREENA):
-    rect(s,x,y,w,h,fill=BEIGE,line=LGRAY,line_w=1.0,rounded=True)
-    rect(s,x,y,0.12,h,fill=accent)
-    textbox(s,x+0.3,y+0.16,w-0.5,0.26,[(f"{no}  {en}",9.5,accent,True,1.0)])
-    textbox(s,x+0.3,y+0.42,w-0.5,0.4,[(title,14.5,INK,True)])
+def card(s,x,y,w,h,no,en,title,bullets,accent=GREENA,highlight=False):
+    bg=accent if highlight else BEIGE
+    rect(s,x,y,w,h,fill=bg,line=(None if highlight else LGRAY),line_w=1.0,rounded=True)
+    if not highlight: rect(s,x,y,0.12,h,fill=accent)
+    en_c=LIME if highlight else accent
+    ti_c=WHITE if highlight else INK
+    bu_c=RGBColor(0xE8,0xF1,0xE8) if highlight else RGBColor(0x3A,0x3A,0x36)
+    textbox(s,x+0.3,y+0.16,w-0.5,0.26,[(f"{no}  {en}",9.5,en_c,True,1.0)])
+    textbox(s,x+0.3,y+0.42,w-0.5,0.4,[(title,14.5,ti_c,True)])
     bullets_tb=s.shapes.add_textbox(Inches(x+0.3),Inches(y+0.92),Inches(w-0.55),Inches(h-1.05))
     tf=bullets_tb.text_frame; tf.word_wrap=True
     tf.margin_left=Pt(0);tf.margin_top=Pt(0);tf.margin_right=Pt(0);tf.margin_bottom=Pt(0)
     for i,b in enumerate(bullets):
         p=tf.paragraphs[0] if i==0 else tf.add_paragraph(); p.space_after=Pt(5); p.line_spacing=1.02
-        r=p.add_run(); r.text="·  "+b; _set_font(r,10.5,RGBColor(0x3A,0x3A,0x36),False)
+        r=p.add_run(); r.text="·  "+b; _set_font(r,10.5,bu_c,False)
 
 # ============================================================ SLIDE 1
 s=prs.slides.add_slide(BL)
@@ -101,19 +105,21 @@ pillars=[
    "업로드 트래킹·조회수 임계치 기준 인센티브 지급",
    "캠페인별 단가 별도 · 전담 매니저가 내역 관리",
    "고성과 생산자에게 보상 집중 → 품질 상향"]),
- ("04","GOVERNANCE","양해각서(MOU) 운영",[
-   "법적 부담 없는 느슨한 합의 · 단일 커뮤니케이션 창구",
-   "브랜드 가이드·일정은 반드시 준수",
-   "경쟁 카테고리 충돌 통제(원칙 MOU 명시)"]),
+ ("04","COST ADVANTAGE","비용 경쟁력",[
+   "고성과 크리에이터, 시장 통상 건당 50만원 이상",
+   "구좌 선점 + 다회차 계약으로 건당 40만원 확보 (20% ↓)",
+   "예측 가능한 단가로 안정적 고품질 콘텐츠 수급"]),
 ]
 pos=[(gx[0],gy[0]),(gx[1],gy[0]),(gx[0],gy[1]),(gx[1],gy[1])]
-acc=[GREENA,MAIN,GREENA,MAIN]
-for (no,en,t,bl),(x,y),a in zip(pillars,pos,acc):
-    card(s,x,y,gw,gh,no,en,t,bl,accent=a)
+acc=[GREENA,MAIN,MAIN,GREENA]
+hl=[False,False,False,True]
+for (no,en,t,bl),(x,y),a,h in zip(pillars,pos,acc,hl):
+    card(s,x,y,gw,gh,no,en,t,bl,accent=a,highlight=h)
 
-# vision bar
+# 광고주 베네핏 bar
 rect(s,0.9,6.42,11.53,0.66,fill=MAIN,rounded=True)
-textbox(s,1.2,6.42,11.0,0.66,[("우리는 크리에이터를 ‘채널’로 소비하지 않습니다  —  ",11.5,WHITE,True),("브랜드와 함께 성장하는 ‘관계와 시스템’을 구축합니다",11.5,LIME,True)],anchor=MSO_ANCHOR.MIDDLE,align=PP_ALIGN.CENTER)
+textbox(s,1.2,6.42,11.0,0.66,[("광고주 베네핏     ",11,LIME,True),
+  ("시장가 대비 약 20% 절감 단가   ·   검증된 고품질 콘텐츠   ·   6개월 안정적·예측 가능한 수급",11.5,WHITE,True)],anchor=MSO_ANCHOR.MIDDLE,align=PP_ALIGN.CENTER)
 
 prs.save("proposal/올더베러_BATi_2p.pptx")
 print("saved", len(prs.slides._sldIdLst))
