@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>올더베러 8월 바이럴 견적안</title>
+<style>
+  :root{
+    --navy:#17375E;
+    --navy-2:#1E4A7A;
+    --blue:#2E5F8A;
+    --blue-tint:#EAF1F8;
+    --blue-tint-2:#F4F8FC;
+    --ink:#1E2A38;
+    --muted:#5B6B7C;
+    --line:#C9D4E0;
+    --line-soft:#DEE6EF;
+    --grey-row:#E7ECF3;
+    --bg:#EDF1F6;
+    --card:#FFFFFF;
+    --accent:#C9A227;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --navy:#0F2438;
+      --navy-2:#173a5c;
+      --blue:#2b567c;
+      --blue-tint:#1a2a3a;
+      --blue-tint-2:#16222f;
+      --ink:#E7EDF4;
+      --muted:#9DB0C4;
+      --line:#31465c;
+      --line-soft:#28394c;
+      --grey-row:#1c2c3c;
+      --bg:#0b131c;
+      --card:#121e2b;
+      --accent:#D9B94A;
+    }
+  }
+  :root[data-theme="dark"]{
+    --navy:#0F2438;--navy-2:#173a5c;--blue:#2b567c;--blue-tint:#1a2a3a;--blue-tint-2:#16222f;
+    --ink:#E7EDF4;--muted:#9DB0C4;--line:#31465c;--line-soft:#28394c;--grey-row:#1c2c3c;
+    --bg:#0b131c;--card:#121e2b;--accent:#D9B94A;
+  }
+  :root[data-theme="light"]{
+    --navy:#17375E;--navy-2:#1E4A7A;--blue:#2E5F8A;--blue-tint:#EAF1F8;--blue-tint-2:#F4F8FC;
+    --ink:#1E2A38;--muted:#5B6B7C;--line:#C9D4E0;--line-soft:#DEE6EF;--grey-row:#E7ECF3;
+    --bg:#EDF1F6;--card:#FFFFFF;--accent:#C9A227;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","맑은 고딕","Noto Sans KR",
+      -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    padding:32px 16px 64px;
+  }
+  .doc{
+    max-width:1040px;
+    margin:0 auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(15,36,56,.10);
+  }
+
+  /* ---------- header band ---------- */
+  .band{
+    background:var(--navy);
+    color:#fff;
+    padding:26px 34px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .band .title h1{
+    margin:0;
+    font-size:30px;
+    letter-spacing:.14em;
+    font-weight:800;
+  }
+  .band .title .en{
+    margin-top:6px;
+    font-size:12px;
+    letter-spacing:.34em;
+    color:#AEC4DC;
+    text-transform:uppercase;
+  }
+  .band .meta{
+    text-align:right;
+    font-size:12.5px;
+    color:#C6D6E6;
+    line-height:1.7;
+  }
+  .band .meta strong{
+    display:block;
+    font-size:16px;
+    color:#fff;
+    letter-spacing:.02em;
+    margin-bottom:4px;
+  }
+
+  /* ---------- overview ---------- */
+  .overview{
+    padding:22px 34px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px 34px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .ov{display:flex;gap:12px;font-size:13px;}
+  .ov .k{
+    flex:0 0 76px;
+    color:var(--muted);
+    font-weight:700;
+    letter-spacing:.02em;
+  }
+  .ov .v{color:var(--ink);}
+  .ov .v b{color:var(--navy-2);}
+
+  .lead{
+    padding:16px 34px 4px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  /* ---------- table ---------- */
+  .tablewrap{padding:8px 34px 4px;overflow-x:auto;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+    min-width:720px;
+  }
+  thead th{
+    background:var(--navy);
+    color:#fff;
+    font-weight:700;
+    padding:11px 10px;
+    text-align:center;
+    letter-spacing:.02em;
+    border:1px solid var(--navy);
+    white-space:nowrap;
+  }
+  thead th .sub{
+    display:block;
+    font-size:10.5px;
+    color:#AEC4DC;
+    font-weight:600;
+    margin-top:2px;
+  }
+  tbody td{
+    padding:10px;
+    border:1px solid var(--line-soft);
+    text-align:center;
+    vertical-align:middle;
+    font-variant-numeric:tabular-nums;
+  }
+  tbody td.no{font-weight:700;color:var(--navy-2);background:var(--blue-tint-2);}
+  tbody td.group{
+    text-align:left;
+    line-height:1.45;
+  }
+  tbody td.group .gname{font-weight:700;color:var(--ink);display:block;}
+  tbody td.group .gprod{color:var(--muted);font-size:12px;}
+  tbody td.group .gw{
+    display:inline-block;margin-top:4px;font-size:11px;font-weight:700;
+    color:var(--blue);background:var(--blue-tint);
+    padding:1px 7px;border-radius:10px;
+  }
+  tbody td.grade{font-weight:600;}
+  tbody td.right{text-align:right;padding-right:14px;}
+  tbody td.amt{text-align:right;padding-right:14px;font-weight:700;color:var(--ink);}
+  tbody tr.grp-start td{border-top:1.5px solid var(--line);}
+  tbody tr:hover td{background:rgba(46,95,138,.05);}
+  .won{color:var(--muted);margin-right:2px;font-weight:600;}
+
+  /* ---------- summary ---------- */
+  .sumwrap{padding:14px 34px 6px;overflow-x:auto;}
+  table.sum{min-width:520px;font-size:13px;}
+  table.sum td{padding:10px 12px;border:1px solid var(--line-soft);}
+  table.sum td.lab{background:var(--grey-row);font-weight:700;text-align:center;letter-spacing:.02em;}
+  table.sum td.qty{text-align:center;font-variant-numeric:tabular-nums;}
+  table.sum td.val{text-align:right;padding-right:16px;font-variant-numeric:tabular-nums;font-weight:700;}
+  table.sum tr.total td{background:var(--navy);color:#fff;font-size:15px;border-color:var(--navy);}
+  table.sum tr.total td .won{color:#AEC4DC;}
+  table.sum tr.vat td{background:var(--grey-row);color:var(--ink);}
+
+  /* ---------- notes ---------- */
+  .notes{
+    margin:20px 34px 30px;
+    background:var(--blue-tint-2);
+    border:1px solid var(--line-soft);
+    border-left:3px solid var(--blue);
+    border-radius:3px;
+    padding:16px 20px;
+  }
+  .notes h3{
+    margin:0 0 10px;
+    font-size:13px;
+    letter-spacing:.03em;
+    color:var(--navy-2);
+  }
+  .notes ul{margin:0;padding-left:18px;}
+  .notes li{font-size:12.5px;color:var(--muted);margin:5px 0;line-height:1.55;}
+  .notes li b{color:var(--ink);}
+
+  .foot{
+    padding:14px 34px 24px;
+    font-size:11px;
+    color:var(--muted);
+    border-top:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  }
+
+  @media (max-width:640px){
+    .overview{grid-template-columns:1fr;}
+    .band{padding:20px;}
+    .band .title h1{font-size:24px;}
+    .tablewrap,.sumwrap{padding-left:14px;padding-right:14px;}
+    .notes,.foot{margin-left:14px;margin-right:14px;}
+  }
+</style>
+</head>
+<body>
+  <main class="doc">
+
+    <!-- HEADER -->
+    <header class="band">
+      <div class="title">
+        <h1>견 적 안</h1>
+        <div class="en">QUOTATION &nbsp;·&nbsp; All the Better</div>
+      </div>
+      <div class="meta">
+        <strong>올더베러 8월 바이럴</strong>
+        나만의 웰니스 &ldquo;루틴&rdquo; 소개 · 숏폼<br>
+        작성일 2026.07.13 &nbsp;·&nbsp; 단위: 원 (VAT 별도)
+      </div>
+    </header>
+
+    <!-- OVERVIEW -->
+    <section class="overview">
+      <div class="ov"><span class="k">캠페인</span><span class="v"><b>올더베러 8월 바이럴</b> — 나만의 웰니스 &lsquo;루틴&rsquo; 소개 숏폼</span></div>
+      <div class="ov"><span class="k">인플루언서</span><span class="v">나노 · 마이크로 중심 (매크로 제외) · <b>총 113명</b></span></div>
+      <div class="ov"><span class="k">메인 제품</span><span class="v">구미 30일분 6종 · 올리브오일/캡슐 · 워터스틱 · 에너지 부스터 샷</span></div>
+      <div class="ov"><span class="k">예산</span><span class="v">3천만원 내외 &nbsp;→&nbsp; <b>29,755,000원 (VAT 포함)</b></span></div>
+      <div class="ov"><span class="k">릴리즈</span><span class="v">7/29~ 순차 업로드 (배송완료 ~7/24)</span></div>
+      <div class="ov"><span class="k">앵글</span><span class="v">제품 활용 자유 웰니스 루틴 소개 (단순 노출 · USP 소구 지양)</span></div>
+    </section>
+
+    <p class="lead">아래와 같이 견적합니다. 그룹별 제품 비중에 따라 나노 · 마이크로 인원을 배분하였습니다.</p>
+
+    <!-- MAIN TABLE -->
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:44px">NO</th>
+            <th style="min-width:210px">그룹 (앵글 · 제품)</th>
+            <th style="width:96px">릴리즈 시기</th>
+            <th style="width:96px">인플루언서<br>등급</th>
+            <th style="width:60px">수량</th>
+            <th style="width:130px">건당 비용<span class="sub">마크업 미포함</span></th>
+            <th style="width:150px">합계 (원)<span class="sub">VAT 별도</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Group 1 -->
+          <tr class="grp-start">
+            <td class="no" rowspan="2">1</td>
+            <td class="group" rowspan="2">
+              <span class="gname">그룹 ① 파워팩 메인제품 전체</span>
+              <span class="gprod">구미30일분 / 올리브오일·캡슐 / 워터스틱 / 에너지부스터샷</span>
+              <span class="gw">비중 40%</span>
+            </td>
+            <td rowspan="2">7/29~<br>(순차)</td>
+            <td class="grade">마이크로</td>
+            <td>5</td>
+            <td class="right"><span class="won">₩</span>350,000</td>
+            <td class="amt"><span class="won">₩</span>1,750,000</td>
+          </tr>
+          <tr>
+            <td class="grade">나노</td>
+            <td>40</td>
+            <td class="right"><span class="won">₩</span>225,000</td>
+            <td class="amt"><span class="won">₩</span>9,000,000</td>
+          </tr>
+
+          <!-- Group 2 -->
+          <tr class="grp-start">
+            <td class="no" rowspan="2">2</td>
+            <td class="group" rowspan="2">
+              <span class="gname">그룹 ② 구미 30일분</span>
+              <span class="gprod">웰니스 구미 6종 (콜라겐·멜라토닌 외 건기식)</span>
+              <span class="gw">비중 20%</span>
+            </td>
+            <td rowspan="2">7/29~<br>(순차)</td>
+            <td class="grade">마이크로</td>
+            <td>3</td>
+            <td class="right"><span class="won">₩</span>350,000</td>
+            <td class="amt"><span class="won">₩</span>1,050,000</td>
+          </tr>
+          <tr>
+            <td class="grade">나노</td>
+            <td>20</td>
+            <td class="right"><span class="won">₩</span>225,000</td>
+            <td class="amt"><span class="won">₩</span>4,500,000</td>
+          </tr>
+
+          <!-- Group 3 -->
+          <tr class="grp-start">
+            <td class="no" rowspan="2">3</td>
+            <td class="group" rowspan="2">
+              <span class="gname">그룹 ③ 올리브오일 · 캡슐</span>
+              <span class="gprod">엑스트라버진 올리브오일 / 올리브오일 캡슐</span>
+              <span class="gw">비중 20%</span>
+            </td>
+            <td rowspan="2">7/29~<br>(순차)</td>
+            <td class="grade">마이크로</td>
+            <td>3</td>
+            <td class="right"><span class="won">₩</span>350,000</td>
+            <td class="amt"><span class="won">₩</span>1,050,000</td>
+          </tr>
+          <tr>
+            <td class="grade">나노</td>
+            <td>20</td>
+            <td class="right"><span class="won">₩</span>225,000</td>
+            <td class="amt"><span class="won">₩</span>4,500,000</td>
+          </tr>
+
+          <!-- Group 4 -->
+          <tr class="grp-start">
+            <td class="no" rowspan="2">4</td>
+            <td class="group" rowspan="2">
+              <span class="gname">그룹 ④ 워터스틱</span>
+              <span class="gprod">데일리 워터스틱 (물에 타먹는 스틱형)</span>
+              <span class="gw">비중 10%</span>
+            </td>
+            <td rowspan="2">7/29~<br>(순차)</td>
+            <td class="grade">마이크로</td>
+            <td>1</td>
+            <td class="right"><span class="won">₩</span>350,000</td>
+            <td class="amt"><span class="won">₩</span>350,000</td>
+          </tr>
+          <tr>
+            <td class="grade">나노</td>
+            <td>10</td>
+            <td class="right"><span class="won">₩</span>225,000</td>
+            <td class="amt"><span class="won">₩</span>2,250,000</td>
+          </tr>
+
+          <!-- Group 5 -->
+          <tr class="grp-start">
+            <td class="no" rowspan="2">5</td>
+            <td class="group" rowspan="2">
+              <span class="gname">그룹 ⑤ 에너지 부스터 샷</span>
+              <span class="gprod">에너지 부스터 샷 (엠플·샷 형태)</span>
+              <span class="gw">비중 10%</span>
+            </td>
+            <td rowspan="2">7/29~<br>(순차)</td>
+            <td class="grade">마이크로</td>
+            <td>1</td>
+            <td class="right"><span class="won">₩</span>350,000</td>
+            <td class="amt"><span class="won">₩</span>350,000</td>
+          </tr>
+          <tr>
+            <td class="grade">나노</td>
+            <td>10</td>
+            <td class="right"><span class="won">₩</span>225,000</td>
+            <td class="amt"><span class="won">₩</span>2,250,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="sumwrap">
+      <table class="sum">
+        <tr>
+          <td class="lab" style="width:150px">마이크로 소계</td>
+          <td class="qty" style="width:70px">13명</td>
+          <td class="qty">@ ₩350,000</td>
+          <td class="val"><span class="won">₩</span>4,550,000</td>
+        </tr>
+        <tr>
+          <td class="lab">나노 소계</td>
+          <td class="qty">100명</td>
+          <td class="qty">@ ₩225,000</td>
+          <td class="val"><span class="won">₩</span>22,500,000</td>
+        </tr>
+        <tr>
+          <td class="lab">합 계</td>
+          <td class="qty">113명</td>
+          <td class="qty">공급가액</td>
+          <td class="val"><span class="won">₩</span>27,050,000</td>
+        </tr>
+        <tr class="vat">
+          <td class="lab">VAT (10%)</td>
+          <td class="qty">—</td>
+          <td class="qty">부가가치세</td>
+          <td class="val"><span class="won">₩</span>2,705,000</td>
+        </tr>
+        <tr class="total">
+          <td class="lab" style="background:var(--navy);color:#fff;">총 계</td>
+          <td class="qty">113명</td>
+          <td class="qty">VAT 포함</td>
+          <td class="val"><span class="won">₩</span>29,755,000</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- NOTES -->
+    <section class="notes">
+      <h3>유의사항 · 비고</h3>
+      <ul>
+        <li><b>등급 단가</b> — 마이크로 ₩350,000 / 나노 ₩225,000 (마크업 미포함). 매크로는 제외하고 나노 · 마이크로 다수 인원으로 구성.</li>
+        <li><b>제품 비중</b> — 그룹 ①40% / ②20% / ③20% / ④10% / ⑤10% 기준으로 인원 배분 (실집행 비중 각 39.7 / 20.5 / 20.5 / 9.6 / 9.6%).</li>
+        <li><b>심의</b> — 구미 6종 중 <b>콜라겐 · 멜라토닌 제외</b>는 모두 건강기능식품. 바이럴 시 <b>USP 소구 지양</b>, 단순 노출만 진행 (별도 심의 필요).</li>
+        <li><b>콘텐츠</b> — 제품 활용 자유형 웰니스 루틴 숏폼 (예: 자기 전 멜라토닌 구미 / 사무실에서 워터스틱 한 잔 → 에너지 UP).</li>
+        <li><b>일정</b> — ~7/22 인원·가이드 확정 / ~7/24 배송완료 / 7/29~ 순차 업로드.</li>
+        <li><b>프로모션 스킴</b>은 별도 공유 예정. 상기 금액은 인플루언서 시딩 집행분 기준 (VAT 별도 표기).</li>
+      </ul>
+    </section>
+
+    <footer class="foot">
+      <span>올더베러 (All the Better) · 8월 바이럴 인플루언서 시딩</span>
+      <span>단위: 원 · VAT 별도 · 예산 3천만원 내외</span>
+    </footer>
+
+  </main>
+</body>
+</html>
